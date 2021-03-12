@@ -738,6 +738,10 @@ EOT
     fi
 
     printf "$ROOT_PASSWORD\n$ROOT_PASSWORD" | arch-chroot /mnt passwd
+
+    # Setup pacman-key
+    arch-chroot /mnt pacman-key --init
+    arch-chroot /mnt pacman-key --populate archlinux
 }
 
 function mkinitcpio_configuration() {
