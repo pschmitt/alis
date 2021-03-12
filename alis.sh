@@ -576,7 +576,7 @@ function partition() {
         mkfs.fat -n ESP -F32 $PARTITION_BOOT
     fi
     if [ "$BIOS_TYPE" == "bios" ]; then
-        mkfs.ext4 -L boot $PARTITION_BOOT
+        mkfs.ext4 -q -F -L boot $PARTITION_BOOT
     fi
     if [ "$FILE_SYSTEM_TYPE" == "f2fs" -o "$FILE_SYSTEM_TYPE" == "reiserfs" ]; then
         mkfs."$FILE_SYSTEM_TYPE" -l root $DEVICE_ROOT
