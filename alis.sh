@@ -1795,6 +1795,14 @@ function main() {
     ALL_STEPS=("configuration_install" "sanitize_variables" "check_variables" "warning" "init" "facts" "checks" "prepare" "partition" "install" "configuration" "mkinitcpio_configuration" "display_driver" "kernels" "mkinitcpio" "network" "virtualbox" "users" "bootloader" "custom_shell" "desktop_environment" "packages" "vagrant" "systemd_units" "end")
     STEP="configuration_install"
 
+    # Skip warning message if run with -y|--force
+    case "$1" in
+        -y|--force)
+            ALL_STEPS=("${ALL_STEPS[@]/warning}")
+            shift
+            ;;
+    esac
+
     if [ -n "$1" ]; then
         STEP="$1"
     fi
