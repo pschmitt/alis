@@ -816,6 +816,9 @@ function mkinitcpio_configuration() {
         fi
     fi
     HOOKS=$(sanitize_variable "$HOOKS")
+    if grep -q "systemd-tool" <<< "$HOOKS"; then
+       pacman_install "mkinitcpio-systemd-tool"
+    fi
     arch-chroot /mnt sed -i "s/^HOOKS=(.*)$/HOOKS=($HOOKS)/" /etc/mkinitcpio.conf
 
     if [ "$KERNELS_COMPRESSION" != "" ]; then
